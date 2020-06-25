@@ -13,20 +13,18 @@ set -e
 #
 # Should you want to bypass the pre-commit hook (though not recommended), you can commit with "git commit --no-verify".
 
-
 # The following is a text file that represents your custom dictionary; edit as necessary. Add words to it that you wish
 # to ignore for the spell check.
 dict=~/.git-spell-check
 if [ ! -f $dict ]; then
-    touch ~/.git-spell-check
-    dict=~/.git-spell-check
-    printf "%s\n" "Custom dictionary not found. Created ~/.git-spell-check..."
+    touch $dict
+    printf "%s\n" "Custom dictionary not found. Created $dict..."
 fi
 
 
 # The following is a temporary dictionary (a binary file) created from the dict text file. It is deleted after the
 # script finishes.
-temp_dict=$(mktemp docs-dictionary-XXXXXX)
+temp_dict=$(mktemp /tmp/docs-dictionary-XXXXXX)
 
 # Language of your doc. When using a non-English language, make sure you have the appropriate aspell libraries
 # installed: "yum search aspell". For example, to spell check in Slovak, you must have the aspell-sk package installed.
